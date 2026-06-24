@@ -61,14 +61,15 @@ while game:
             mouse_yPos = pos[1]
             if carte_disp:
                 x=fun.click_card(mouse_xPos, mouse_yPos,sizeY,sizeX,cSizeX,cSizeY)
-                print("card selected: "+str(x))
-                if x!=-1 and lista_correnti[x].costo<=mana:
-                    mana-=lista_correnti[x].costo
-                    carte_disp=False
-                else: 
-                    print("not enough mana")
-                    mana_time=900
-                    
+                if x != -1:
+                    if lista_correnti[x].costo<=mana:
+                        mana-=lista_correnti[x].costo
+                        carte_disp=False
+                        print(x)
+                    else:
+                        print("not enough mana")
+                        mana_time=900
+                else: print("card not selected")
             else: print("cards not available")
 
         
