@@ -32,4 +32,4 @@ def make_list_cards():
     card1=spawn_carte()
     card2=spawn_carte()
     card3=spawn_carte()
-    return list(card1,card2,card3)
+    return [card1,card2,card3]

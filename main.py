@@ -11,7 +11,7 @@ sizeY = 800
 cSizeX = 137
 cSizeY = 216
 
-myScreen= pygame.display.set_mode((sizeX, sizeY))
+myScreen= pygame.display.set_mode((sizeX, sizeY),display=1)
 pygame.display.set_caption('DTT')
 
 # custom background
@@ -25,17 +25,29 @@ game_font=pygame.font.Font(None,45)
 carte_disp=True
 
 lista_correnti=carte.make_list_cards()
+tempo=0
+tempo_change=0
 
 game=True
 mana=0
 ck=pygame.time.Clock() 
 passed=0
+passed_carte=0
+inizio_passed_carte=-1
 while game:
-    passed+=ck.tick(60) #imposto 60 fps e ottengo in passed quanto tempo è passato dall'ultimo frame
+    tempo_change=ck.tick(60) #imposto 60 fps e ottengo in passed quanto tempo è passato dall'ultimo frame
+    passed_carte+=tempo
+    passed+=tempo_change
+    tempo+=tempo_change
+
+    if carte_disp:
+        inizio_passed_carte=tempo
+    
     if passed>=7200:
         mana+=2
         passed-=7200 #tolgo il tempo trascorso/non resetto a 0 altrimenti perderei probabiblmente qualche millisecondo
     mana_text=game_font.render(f"Mana: {mana}",True, (255,255,255))
+    myScreen.blit(mana_text,(315,10))
 
     for event in pygame.event.get():
         if event.type == pygame.MOUSEBUTTONDOWN: # if clicked
@@ -45,22 +57,35 @@ while game:
             if carte_disp:
                 x=fun.click_card(mouse_xPos, mouse_yPos,sizeY,sizeX,cSizeX,cSizeY)
                 print(x)
+                carte_disp=False
             else: print("cards not available")
             #aggiungi sistema di riconoscimento carta
 
     if carte_disp:
         immagine=None
-        if lista_correnti[0].tipo==0:
-            immagine=pygame.image.load()
+        vertice_x=10
+        for i in range(3):
+            if lista_correnti[i].tipo==0:
+                immagine=pygame.image.load("assets/carta_debole.png")
+            if lista_correnti[i].tipo==1:
+                immagine=pygame.image.load("assets/carta_media.png")
+            if lista_correnti[i].tipo==2:
+                immagine=pygame.image.load("assets/carta_forte.png")
 
-    if not carte_disp:
+            carta_scaled=pygame.transform.scale(immagine,(137,216))
+            myScreen.blit(carta_scaled,(vertice_x,574))
+            vertice_x+=149
+
+        pygame.display.flip()
+
+
+    if not carte_disp and passed_carte-inizio_passed_carte>=5000:
         carte_disp=True
-        lista_carte=carte.make_list_cards()
+        lista_correnti=carte.make_list_cards()
         
 
 
             
-    myScreen.blit(mana_text,(315,10))
     pygame.display.flip() #ricarica con il mana
     myScreen.blit(background, (0, 0)) #fai ritornare il background
 
