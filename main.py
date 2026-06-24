@@ -1,4 +1,5 @@
 import pygame
+import fun
 
 # initialize the environment
 pygame.init()
@@ -33,6 +34,7 @@ while game:
             pos= pygame.mouse.get_pos()
             mouse_xPos = pos[0]
             mouse_yPos = pos[1]
+            print(fun.click_card(mouse_xPos, mouse_yPos,sizeY,sizeX,))
             
     myScreen.blit(mana_text,(315,25))
     pygame.display.flip() #ricarica con il mana
