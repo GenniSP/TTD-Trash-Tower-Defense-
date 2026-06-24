@@ -7,6 +7,7 @@ pygame.init()
 # define the screen size
 sizeX = 450
 sizeY = 800
+
 myScreen= pygame.display.set_mode((sizeX, sizeY),display=1)
 pygame.display.set_caption('DTT')
 
