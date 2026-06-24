@@ -1,6 +1,7 @@
 import pygame
 import fun
 import carte
+import enemy_module
 
 # initialize the environment
 pygame.init()
@@ -99,7 +100,7 @@ while game:
         carte_disp=True
         lista_correnti=carte.make_list_cards()
         
-
+    enemy_module.move_monster(myScreen, sizeY-cSizeY-30)
 
             
     pygame.display.flip() #ricarica con il mana
