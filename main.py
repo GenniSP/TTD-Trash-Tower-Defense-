@@ -1,6 +1,7 @@
 import pygame
 import fun
 import carte
+import enemy_module
 import health_bar
 
 # initialize the environment
@@ -12,7 +13,7 @@ sizeY = 800
 cSizeX = 137
 cSizeY = 216
 
-myScreen= pygame.display.set_mode((sizeX, sizeY),display=1)
+myScreen= pygame.display.set_mode((sizeX, sizeY),display=0)
 pygame.display.set_caption('DTT')
 
 # custom background
@@ -102,7 +103,7 @@ while game:
         carte_disp=True
         lista_correnti=carte.make_list_cards()
         
-
+    enemy_module.move_monster(myScreen, sizeY-cSizeY-40)
 
             
     pygame.display.flip() #ricarica con il mana
