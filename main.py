@@ -33,6 +33,10 @@ mana=0
 ck=pygame.time.Clock() 
 passed=0
 inizio_passed_carte=-1
+mana_time=-1
+mana_text_temp=pygame.font.Font(None,25)
+not_enough=mana_text_temp.render(f"Not enough Mana!",True,(255,255,255))
+
 while game:
     tempo_change=ck.tick(60) #imposto 60 fps e ottengo in passed quanto tempo è passato dall'ultimo frame
     passed+=tempo_change
@@ -42,9 +46,9 @@ while game:
         inizio_passed_carte=tempo
     
     if passed>=7200:
-        if mana<30:
+        if mana<32:
             mana+=2
-        passed-=7200 #tolgo il tempo trascorso/non resetto a 0 altrimenti perderei probabiblmente qualche millisecondo
+        passed-=7150 #tolgo il tempo trascorso/non resetto a 0 altrimenti perderei probabiblmente qualche millisecondo
     mana_text=game_font.render(f"Mana: {mana}",True, (255,255,255))
     myScreen.blit(mana_text,(315,10))
 
@@ -56,9 +60,23 @@ while game:
             if carte_disp:
                 x=fun.click_card(mouse_xPos, mouse_yPos,sizeY,sizeX,cSizeX,cSizeY)
                 print(x)
-                carte_disp=False
+                if lista_correnti[x].costo<=mana:
+                    mana-=lista_correnti[x].costo
+                    carte_disp=False
+                else: 
+                    print("not enough mana")
+                    mana_time=900
+                    
             else: print("cards not available")
             #aggiungi sistema di riconoscimento carta
+
+    if mana_time>0:
+        mana_time-=tempo_change
+        myScreen.blit(not_enough,(151,540))
+
+
+
+
 
     if carte_disp:
         immagine=None
@@ -75,7 +93,6 @@ while game:
             myScreen.blit(carta_scaled,(vertice_x,575))
             vertice_x+=149
 
-        pygame.display.flip()
 
 
     if not carte_disp and tempo-inizio_passed_carte>=5000:
