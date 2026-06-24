@@ -24,8 +24,8 @@ def spawn_carte():
         power=rnd.randint(4,7)
         vita=rnd.randint(6,8)
     if tipo==2:
-        power=rnd.randint(8,10)
-        vita=rnd.randint(8,10)
+        power=rnd.randint(8,9)
+        vita=rnd.randint(8,9)
     return Carta(power,tipo,rnd.randint(3,8),vita)
 
 def make_list_cards():
