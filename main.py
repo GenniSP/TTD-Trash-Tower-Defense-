@@ -1,6 +1,7 @@
 import pygame
 import fun
 import carte
+import health_bar
 
 # initialize the environment
 pygame.init()
@@ -59,8 +60,8 @@ while game:
             mouse_yPos = pos[1]
             if carte_disp:
                 x=fun.click_card(mouse_xPos, mouse_yPos,sizeY,sizeX,cSizeX,cSizeY)
-                print(x)
-                if lista_correnti[x].costo<=mana:
+                print("card selected: "+str(x))
+                if x!=-1 and lista_correnti[x].costo<=mana:
                     mana-=lista_correnti[x].costo
                     carte_disp=False
                 else: 
@@ -69,6 +70,8 @@ while game:
                     
             else: print("cards not available")
             #aggiungi sistema di riconoscimento carta
+        
+    health_bar.draw_health_bar(myScreen)
 
     if mana_time>0:
         mana_time-=tempo_change

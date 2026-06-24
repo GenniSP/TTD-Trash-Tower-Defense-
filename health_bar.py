@@ -1,7 +1,7 @@
 import pygame
 import fun
 
-
+pygame.font.init()
 max_health = 200
 current_health = max_health
 
@@ -16,7 +16,7 @@ color_black = (0, 0, 0)
 
 game_font = pygame.font.Font(None, 25)  
 
-def draw_health_bar():
+def draw_health_bar(myScreen):
     current_width = (current_health / max_health) * health_bar_width
     
     pygame.draw.rect(myScreen, color_gray, 
@@ -30,4 +30,4 @@ def draw_health_bar():
     text_rect = hp_text.get_rect(center=(health_bar_x + health_bar_width // 2, 
                                           health_bar_y + health_bar_height // 2))
 
-    return hp_text, text_rect
+    myScreen.blit(hp_text,text_rect)
