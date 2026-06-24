@@ -1,30 +1,33 @@
 import pygame
-import random
-import time
-import sys
-pygame.init() 
+import fun
 
-# schermo
-width = 225
-height = 400
-myScreen = pygame.display.set_mode((width, height))
-pygame.display.set_caption('Trash Tower Defense')
-background = pygame.image.load('background1.png')
-rect_top_left_x = 0
-rect_top_left_y = 0
-rect_width = 112.5
-rect_height = 20
-pygame.draw.rect(myScreen, pygame.Color('red'), 
-              [rect_top_left_x, rect_top_left_y, 
-               rect_width, rect_height])
 
-pygame.display.flip()
-5
-#vita torri e cosa succede se muoiono
-our_health = 100
-enemy_health = 200
-if enemy_health <= 0:
-    print("Enemy defeated! You win!")
+max_health = 200
+current_health = max_health
 
-if our_health <= 0:
-    print("You have been defeated! Game over!")
+health_bar_x = 10
+health_bar_y = 10
+health_bar_width = 200
+health_bar_height = 20
+
+color_red = (255, 0, 0)
+color_gray = (200, 200, 200)
+color_black = (0, 0, 0)
+
+game_font = pygame.font.Font(None, 25)  
+
+def draw_health_bar():
+    current_width = (current_health / max_health) * health_bar_width
+    
+    pygame.draw.rect(myScreen, color_gray, 
+                     (health_bar_x, health_bar_y, health_bar_width, health_bar_height))
+    pygame.draw.rect(myScreen, color_red, 
+                     (health_bar_x, health_bar_y, current_width, health_bar_height))
+    pygame.draw.rect(myScreen, color_black, 
+                     (health_bar_x, health_bar_y, health_bar_width, health_bar_height), 2)
+    
+    hp_text = game_font.render(str(current_health), True, color_black)
+    text_rect = hp_text.get_rect(center=(health_bar_x + health_bar_width // 2, 
+                                          health_bar_y + health_bar_height // 2))
+
+    return hp_text, text_rect
