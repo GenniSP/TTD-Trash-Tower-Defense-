@@ -62,7 +62,7 @@ while game:
 
     if carte_disp:
         immagine=None
-        vertice_x=10
+        vertice_x=8
         for i in range(3):
             if lista_correnti[i].tipo==0:
                 immagine=pygame.image.load("assets/carta_debole.png")
@@ -72,7 +72,7 @@ while game:
                 immagine=pygame.image.load("assets/carta_forte.png")
 
             carta_scaled=pygame.transform.scale(immagine,(137,216))
-            myScreen.blit(carta_scaled,(vertice_x,574))
+            myScreen.blit(carta_scaled,(vertice_x,575))
             vertice_x+=149
 
         pygame.display.flip()
