@@ -28,6 +28,12 @@ while game:
         passed-=3500 #tolgo il tempo trascorso/non resetto a 0 altrimenti perderei probabiblmente qualche millisecondo
     mana_text=game_font.render(f"Mana: {mana}",True, (255,255,255))
 
+    for event in pygame.event.get():
+        if event.type == pygame.MOUSEBUTTONDOWN: # if clicked
+            pos= pygame.mouse.get_pos()
+            mouse_xPos = pos[0]
+            mouse_yPos = pos[1]
+            
     myScreen.blit(mana_text,(315,25))
     pygame.display.flip() #ricarica con il mana
     myScreen.blit(background, (0, 0)) #fai ritornare il background
