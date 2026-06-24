@@ -39,7 +39,7 @@ while game:
             mouse_yPos = pos[1]
             print(fun.click_card(mouse_xPos, mouse_yPos,sizeY,sizeX,cSizeX,cSizeY))
             
-    myScreen.blit(mana_text,(315,25))
+    myScreen.blit(mana_text,(315,10))
     pygame.display.flip() #ricarica con il mana
     myScreen.blit(background, (0, 0)) #fai ritornare il background
 
