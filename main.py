@@ -70,7 +70,7 @@ while game:
                     mana_time=900
                     
             else: print("cards not available")
-            #aggiungi sistema di riconoscimento carta
+
         
     health_bar.draw_health_bar(myScreen)
 
