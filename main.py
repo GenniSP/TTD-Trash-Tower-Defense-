@@ -32,11 +32,9 @@ game=True
 mana=0
 ck=pygame.time.Clock() 
 passed=0
-passed_carte=0
 inizio_passed_carte=-1
 while game:
     tempo_change=ck.tick(60) #imposto 60 fps e ottengo in passed quanto tempo è passato dall'ultimo frame
-    passed_carte+=tempo
     passed+=tempo_change
     tempo+=tempo_change
 
@@ -44,7 +42,8 @@ while game:
         inizio_passed_carte=tempo
     
     if passed>=7200:
-        mana+=2
+        if mana<30:
+            mana+=2
         passed-=7200 #tolgo il tempo trascorso/non resetto a 0 altrimenti perderei probabiblmente qualche millisecondo
     mana_text=game_font.render(f"Mana: {mana}",True, (255,255,255))
     myScreen.blit(mana_text,(315,10))
@@ -79,7 +78,7 @@ while game:
         pygame.display.flip()
 
 
-    if not carte_disp and passed_carte-inizio_passed_carte>=5000:
+    if not carte_disp and tempo-inizio_passed_carte>=5000:
         carte_disp=True
         lista_correnti=carte.make_list_cards()
         
