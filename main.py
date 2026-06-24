@@ -25,9 +25,9 @@ ck=pygame.time.Clock()
 passed=0
 while game:
     passed+=ck.tick(60) #imposto 60 fps e ottengo in passed quanto tempo è passato dall'ultimo frame
-    if passed>=3500:
+    if passed>=7200:
         mana+=2
-        passed-=3500 #tolgo il tempo trascorso/non resetto a 0 altrimenti perderei probabiblmente qualche millisecondo
+        passed-=7200 #tolgo il tempo trascorso/non resetto a 0 altrimenti perderei probabiblmente qualche millisecondo
     mana_text=game_font.render(f"Mana: {mana}",True, (255,255,255))
 
     for event in pygame.event.get():

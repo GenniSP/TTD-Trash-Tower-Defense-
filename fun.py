@@ -9,4 +9,4 @@ def click_card(x_pos, y_pos, screen_height, screen_width, card_width, card_heigh
     elif (space_between*3+card_width*2 < x_pos < space_between*3+card_width*3) and (screen_height-card_height < y_pos < screen_height):
         return 2
     else:
-        return "no click"
+        return -1
