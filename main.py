@@ -7,8 +7,10 @@ pygame.init()
 # define the screen size
 sizeX = 450
 sizeY = 800
+cSizeX = 137
+cSizeY = 216
 
-myScreen= pygame.display.set_mode((sizeX, sizeY),display=1)
+myScreen= pygame.display.set_mode((sizeX, sizeY))
 pygame.display.set_caption('DTT')
 
 # custom background
@@ -35,7 +37,7 @@ while game:
             pos= pygame.mouse.get_pos()
             mouse_xPos = pos[0]
             mouse_yPos = pos[1]
-            print(fun.click_card(mouse_xPos, mouse_yPos,sizeY,sizeX,))
+            print(fun.click_card(mouse_xPos, mouse_yPos,sizeY,sizeX,cSizeX,cSizeY))
             
     myScreen.blit(mana_text,(315,25))
     pygame.display.flip() #ricarica con il mana
