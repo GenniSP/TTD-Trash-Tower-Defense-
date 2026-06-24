@@ -1,6 +1,8 @@
 import pygame
 import fun
 import carte
+import enemy_module
+import health_bar
 
 # initialize the environment
 pygame.init()
@@ -11,7 +13,7 @@ sizeY = 800
 cSizeX = 137
 cSizeY = 216
 
-myScreen= pygame.display.set_mode((sizeX, sizeY),display=1)
+myScreen= pygame.display.set_mode((sizeX, sizeY),display=0)
 pygame.display.set_caption('DTT')
 
 # custom background
@@ -59,16 +61,19 @@ while game:
             mouse_yPos = pos[1]
             if carte_disp:
                 x=fun.click_card(mouse_xPos, mouse_yPos,sizeY,sizeX,cSizeX,cSizeY)
-                print(x)
-                if lista_correnti[x].costo<=mana:
-                    mana-=lista_correnti[x].costo
-                    carte_disp=False
-                else: 
-                    print("not enough mana")
-                    mana_time=900
-                    
+                if x != -1:
+                    if lista_correnti[x].costo<=mana:
+                        mana-=lista_correnti[x].costo
+                        carte_disp=False
+                        print(x)
+                    else:
+                        print("not enough mana")
+                        mana_time=900
+                else: print("card not selected")
             else: print("cards not available")
-            #aggiungi sistema di riconoscimento carta
+
+        
+    health_bar.draw_health_bar(myScreen)
 
     if mana_time>0:
         mana_time-=tempo_change
@@ -99,7 +104,7 @@ while game:
         carte_disp=True
         lista_correnti=carte.make_list_cards()
         
-
+    enemy_module.move_monster(myScreen, sizeY-cSizeY-40)
 
             
     pygame.display.flip() #ricarica con il mana
