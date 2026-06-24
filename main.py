@@ -1,5 +1,6 @@
 import pygame
 import fun
+import carte
 
 # initialize the environment
 pygame.init()
@@ -21,6 +22,10 @@ myScreen.blit(background, (0, 0))
 
 game_font=pygame.font.Font(None,45)
 
+carte_disp=True
+
+lista_correnti=carte.make_list_cards()
+
 game=True
 mana=0
 ck=pygame.time.Clock() 
@@ -37,7 +42,23 @@ while game:
             pos= pygame.mouse.get_pos()
             mouse_xPos = pos[0]
             mouse_yPos = pos[1]
-            print(fun.click_card(mouse_xPos, mouse_yPos,sizeY,sizeX,cSizeX,cSizeY))
+            if carte_disp:
+                x=fun.click_card(mouse_xPos, mouse_yPos,sizeY,sizeX,cSizeX,cSizeY)
+                print(x)
+            else: print("cards not available")
+            #aggiungi sistema di riconoscimento carta
+
+    if carte_disp:
+        immagine=None
+        if lista_correnti[0].tipo==0:
+            immagine=pygame.image.load()
+
+    if not carte_disp:
+        carte_disp=True
+        lista_carte=carte.make_list_cards()
+        
+
+
             
     myScreen.blit(mana_text,(315,25))
     pygame.display.flip() #ricarica con il mana
