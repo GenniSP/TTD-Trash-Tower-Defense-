@@ -1,5 +1,6 @@
 import pygame
 import random
+import health_bar
 
 # Load and cache fungus images
 mushroom_image_1 = pygame.image.load('assets/funghetto_corsa_1.png')
@@ -50,9 +51,10 @@ def attack_sq(alleati):
 
 
 
+
 def move_monster(screen, height):
     global last_toggle_ms, current_image
-    loss = 0
+    enemies_eliminated = 0
     now_ms = pygame.time.get_ticks()
     if now_ms - last_toggle_ms >= 200:
         last_toggle_ms = now_ms
@@ -71,8 +73,8 @@ def move_monster(screen, height):
         enemy.y += shift_y
         if enemy.y > height:
             enemies.remove(enemy)
-            loss = 1
-    return loss
+            enemies_eliminated += 1
+    return enemies_eliminated
 
 
 def choose_position():

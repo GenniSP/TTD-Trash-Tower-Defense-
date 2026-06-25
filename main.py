@@ -22,7 +22,7 @@ counter = -1
 next_enemy_counter = 0
 
 # Enable GPU acceleration with hardware surface and double buffering
-myScreen = pygame.display.set_mode((sizeX, sizeY), pygame.HWSURFACE | pygame.DOUBLEBUF,display=2)
+myScreen = pygame.display.set_mode((sizeX, sizeY), pygame.HWSURFACE | pygame.DOUBLEBUF,display=0)
 pygame.display.set_caption('DTT')
 
 # custom background (convert to GPU-optimized format)
@@ -178,6 +178,14 @@ while game:
         if el.vita<=0:
             lista_alleati.remove(el)
             continue
+        
+        # Check if ally reached top of screen (80px from top)
+        if el.pos <= 150:
+            # Deal damage based on card power
+            health_bar.current_health -= el.carta.power * 10
+            lista_alleati.remove(el)
+            continue
+        
         image=pygame.image.load("assets/mago_alleato.jpg")
         image=pygame.transform.scale(image,(60,70))
         x_ponte=-1
