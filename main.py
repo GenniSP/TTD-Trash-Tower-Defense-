@@ -8,7 +8,6 @@ import card_text
 import ps
 import good
 
-
 # initialize the environment
 pygame.init()
 
@@ -18,11 +17,12 @@ sizeY = 800
 cSizeX = 137
 cSizeY = 216
 
+
 counter = -1
 next_enemy_counter = 0
 
 # Enable GPU acceleration with hardware surface and double buffering
-myScreen = pygame.display.set_mode((sizeX, sizeY), pygame.HWSURFACE | pygame.DOUBLEBUF,display=2)
+myScreen = pygame.display.set_mode((sizeX, sizeY), pygame.HWSURFACE | pygame.DOUBLEBUF,display=0)
 pygame.display.set_caption('DTT')
 
 # custom background (convert to GPU-optimized format)
@@ -160,7 +160,8 @@ while game:
         counter = enemy_module.choose_position()
         next_enemy_counter = 0
 
-    enemy_module.move_monster(myScreen, sizeY-cSizeY-40)
+    health_loss = enemy_module.move_monster(myScreen, sizeY-cSizeY-40)
+    health_bar_alleati.apply_health_loss(health_loss)
 
     if carte_disp == True:
         for i in range(3):
