@@ -3,6 +3,7 @@ import fun
 import carte
 import enemy_module
 import health_bar
+import card_text
 
 # initialize the environment
 pygame.init()
@@ -49,7 +50,7 @@ while game:
     
     if passed>=7200:
         if mana<32:
-            mana+=2
+            mana+=4
         passed-=7150 #tolgo il tempo trascorso/non resetto a 0 altrimenti perderei probabiblmente qualche millisecondo
     mana_text=game_font.render(f"Mana: {mana}",True, (255,255,255))
     myScreen.blit(mana_text,(315,10))
@@ -103,10 +104,14 @@ while game:
     if not carte_disp and tempo-inizio_passed_carte>=5000:
         carte_disp=True
         lista_correnti=carte.make_list_cards()
+
         
     enemy_module.move_monster(myScreen, sizeY-cSizeY-40)
 
-            
+    if carte_disp == True:
+        for i in range(3):
+            card_text.draw_card_values(myScreen, lista_correnti[i], i)
+
     pygame.display.flip() #ricarica con il mana
     myScreen.blit(background, (0, 0)) #fai ritornare il background
 
