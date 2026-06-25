@@ -1,6 +1,7 @@
 import pygame
 import fun
 
+
 pygame.font.init()
 max_health = 200
 current_health = max_health

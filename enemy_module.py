@@ -25,6 +25,7 @@ pos_x_2 = 450/1.15
 pos_y_2 = startValue02
 shift_y = 0.5
 
+
 # Animation timer for mushroom alternation every 200ms
 last_toggle_ms = pygame.time.get_ticks()
 current_image = 1
@@ -32,6 +33,7 @@ current_image = 1
 
 def move_monster(screen, height):
     global last_toggle_ms, current_image
+    loss = 0
     now_ms = pygame.time.get_ticks()
     if now_ms - last_toggle_ms >= 200:
         last_toggle_ms = now_ms
@@ -39,14 +41,17 @@ def move_monster(screen, height):
 
     mushroom_img = mushroom_image_1 if current_image == 1 else mushroom_image_2
 
-    for i, enemy in enumerate(enemies):
+    for enemy in enemies[:]:
         screen.blit(
             mushroom_img,
             (enemy.x - mushroom_img.get_width() / 2, enemy.y - mushroom_img.get_height() / 2),
         )
-        enemies[i].y += shift_y
+        enemy.y += shift_y
         if enemy.y > height:
-            del enemies[i]
+            enemies.remove(enemy)
+            loss = 1
+    return loss
+
 
 def choose_position():
     choice = random.randint(0, 2)
