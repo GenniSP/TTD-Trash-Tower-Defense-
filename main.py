@@ -16,6 +16,9 @@ sizeY = 800
 cSizeX = 137
 cSizeY = 216
 
+counter = -1
+next_enemy_counter = 0
+
 # Enable GPU acceleration with hardware surface and double buffering
 myScreen = pygame.display.set_mode((sizeX, sizeY), pygame.HWSURFACE | pygame.DOUBLEBUF)
 pygame.display.set_caption('DTT')
@@ -52,6 +55,7 @@ mana_text_temp=pygame.font.Font(None,25)
 not_enough=mana_text_temp.render(f"Not enough Mana!",True,(255,255,255))
 
 while game:
+    next_enemy_counter += 1
     tempo_change=ck.tick(60) #imposto 60 fps e ottengo in passed quanto tempo è passato dall'ultimo frame
     passed+=tempo_change
     tempo+=tempo_change
@@ -110,8 +114,11 @@ while game:
         carte_disp=True
         lista_correnti=carte.make_list_cards()
 
-        
-    enemy_module.move_monster(myScreen, sizeY-cSizeY-40, tempo_change)
+    if next_enemy_counter > counter:
+        counter = enemy_module.choose_position()
+        next_enemy_counter = 0
+
+    enemy_module.move_monster(myScreen, sizeY-cSizeY-40)
 
     if carte_disp == True:
         for i in range(3):
