@@ -197,9 +197,9 @@ while game:
             if current_image==1:
                 image=pygame.image.load("assets/buoni/gufo_debole/design/gufo_movimento_1")
             else: image=pygame.image.load("assets/buoni/gufo_debole/design/gufo_moviment_2")
-            
+
         if el.carta.tipo==1:
-            image=pygame.image.load("assets/buoni/gufo_debole/design/gufo_movimento_1")
+            image=pygame.image.load("assets/buoni/rana/rana.png")
 
         image=pygame.transform.scale(image,(60,70))
         x_ponte=-1
