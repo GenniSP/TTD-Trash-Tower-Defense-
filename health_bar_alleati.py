@@ -1,8 +1,15 @@
 import pygame
+import fun
+import os
+import subprocess
+import sys
 
 pygame.font.init()
 max_health = 150
 current_health = max_health
+
+if current_health <= 0:
+    subprocess.run(f'{sys.executable} youloose.py')
 
 health_bar_x = 10
 health_bar_y = 33

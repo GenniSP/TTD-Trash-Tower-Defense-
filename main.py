@@ -48,7 +48,7 @@ tempo=0
 tempo_change=0
 
 game=True
-mana=69
+mana=4
 ck=pygame.time.Clock() 
 passed=0
 inizio_passed_carte=-1
@@ -74,7 +74,7 @@ while game:
             mana+=4
         passed-=7150 #tolgo il tempo trascorso/non resetto a 0 altrimenti perderei probabiblmente qualche millisecondo
     mana_text=game_font.render(f"Mana: {mana}",True, (255,255,255))
-    myScreen.blit(mana_text,(315,10))
+    myScreen.blit(mana_text,(300,10))
 
 
 
@@ -130,6 +130,7 @@ while game:
         
     health_bar.draw_health_bar(myScreen)
     health_bar_alleati.draw_health_bar(myScreen)
+    
 
     if ask_pos:
         ps.draw_pos(myScreen)
