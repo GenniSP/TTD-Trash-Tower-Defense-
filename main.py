@@ -5,6 +5,7 @@ import enemy_module
 import health_bar
 import card_text
 
+
 # initialize the environment
 pygame.init()
 
@@ -14,14 +15,23 @@ sizeY = 800
 cSizeX = 137
 cSizeY = 216
 
-myScreen= pygame.display.set_mode((sizeX, sizeY),display=0)
+# Enable GPU acceleration with hardware surface and double buffering
+myScreen = pygame.display.set_mode((sizeX, sizeY), pygame.HWSURFACE | pygame.DOUBLEBUF)
 pygame.display.set_caption('DTT')
 
-# custom background
+# custom background (convert to GPU-optimized format)
 background = pygame.image.load('assets/background1.png') 
 # fit to window size
 background = pygame.transform.scale(background, (sizeX, sizeY))
-myScreen.blit(background, (0, 0))
+background = background.convert()  # Optimize for GPU
+
+# Preload and cache card images (GPU-optimized)
+card_images_cache = {}
+for tipo in [0, 1, 2]:
+    img_path = ['assets/carta_debole.png', 'assets/carta_media.png', 'assets/carta_forte.png'][tipo]
+    img = pygame.image.load(img_path)
+    img_scaled = pygame.transform.scale(img, (cSizeX, cSizeY))
+    card_images_cache[tipo] = img_scaled.convert()  # Optimize for GPU
 
 game_font=pygame.font.Font(None,45)
 
@@ -85,17 +95,10 @@ while game:
 
 
     if carte_disp:
-        immagine=None
         vertice_x=8
         for i in range(3):
-            if lista_correnti[i].tipo==0:
-                immagine=pygame.image.load("assets/carta_debole.png")
-            if lista_correnti[i].tipo==1:
-                immagine=pygame.image.load("assets/carta_media.png")
-            if lista_correnti[i].tipo==2:
-                immagine=pygame.image.load("assets/carta_forte.png")
-
-            carta_scaled=pygame.transform.scale(immagine,(137,216))
+            # Use cached GPU-optimized card images
+            carta_scaled = card_images_cache[lista_correnti[i].tipo]
             myScreen.blit(carta_scaled,(vertice_x,575))
             vertice_x+=149
 
