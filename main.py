@@ -3,6 +3,7 @@ import fun
 import carte
 import enemy_module
 import health_bar
+import health_bar_alleati
 import card_text
 import ps
 import good
@@ -124,6 +125,7 @@ while game:
 
         
     health_bar.draw_health_bar(myScreen)
+    health_bar_alleati.draw_health_bar(myScreen)
 
     if ask_pos:
         ps.draw_pos(myScreen)
@@ -151,7 +153,7 @@ while game:
         lista_correnti=carte.make_list_cards()
 
         
-    enemy_module.move_monster(myScreen, sizeY-cSizeY-40)
+    enemy_module.move_monster(myScreen, sizeY-cSizeY-40, tempo_change)
 
     if carte_disp == True:
         for i in range(3):
