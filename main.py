@@ -22,7 +22,7 @@ counter = -1
 next_enemy_counter = 0
 
 # Enable GPU acceleration with hardware surface and double buffering
-myScreen = pygame.display.set_mode((sizeX, sizeY), pygame.HWSURFACE | pygame.DOUBLEBUF,display=0)
+myScreen = pygame.display.set_mode((sizeX, sizeY), pygame.HWSURFACE | pygame.DOUBLEBUF,display=2)
 pygame.display.set_caption('DTT')
 
 # custom background (convert to GPU-optimized format)
@@ -160,17 +160,24 @@ while game:
         counter = enemy_module.choose_position()
         next_enemy_counter = 0
 
-    health_loss = enemy_module.move_monster(myScreen, sizeY-cSizeY-40)
-    health_bar_alleati.apply_health_loss(health_loss)
 
     if carte_disp == True:
         for i in range(3):
             card_text.draw_card_values(myScreen, lista_correnti[i], i)
 
 
+    enemy_module.attack_sq(lista_alleati)
+    
+    health_loss = enemy_module.move_monster(myScreen, sizeY-cSizeY-40)
+    health_bar_alleati.apply_health_loss(health_loss)
+
+
 
     for el in lista_alleati:
         el.pos-=0.5
+        if el.vita<=0:
+            lista_alleati.remove(el)
+            continue
         image=pygame.image.load("assets/mago_alleato.jpg")
         image=pygame.transform.scale(image,(60,70))
         x_ponte=-1
@@ -181,6 +188,8 @@ while game:
         if el.ponte==2:
             x_ponte=358
         myScreen.blit(image,(x_ponte,el.pos))
+
+
 
 
     pygame.display.flip() #ricarica con il mana

@@ -4,6 +4,7 @@ class Alleato:
         self.carta=carta
         self.ponte=ponte
         self.pos=pos
+        self.vita=carta.vita
         pass
 
 

@@ -8,9 +8,10 @@ mushroom_image_2 = pygame.image.load('assets/funghetto_corsa_2.png')
 mushroom_image_2 = pygame.transform.scale(mushroom_image_2, (65, 65))
 
 class Enemy:
-    def __init__(self, x, y):
+    def __init__(self, x, y,):
         self.x = x
         self.y = y
+        self.vita=random.randint(8,12)
 
 startValue02 = 210
 startValue1 = 250
@@ -30,6 +31,22 @@ shift_y = 0.5
 last_toggle_ms = pygame.time.get_ticks()
 current_image = 1
 
+ponti= {
+    pos_x_0:0,
+    pos_x_1:1,
+    pos_x_2:2
+}
+def attack_sq(alleati):
+    for nemico in enemies:
+        for alleato in alleati:
+            if ponti[nemico.x]==alleato.ponte and abs(nemico.y-alleato.pos)<=15:
+                nemico.y-=12
+                alleato.pos+=12
+                nemico.vita-=alleato.carta.power
+                alleato.vita-=2.5
+
+
+
 
 def move_monster(screen, height):
     global last_toggle_ms, current_image
@@ -41,7 +58,10 @@ def move_monster(screen, height):
 
     mushroom_img = mushroom_image_1 if current_image == 1 else mushroom_image_2
 
-    for enemy in enemies[:]:
+    for enemy in enemies:
+        if enemy.vita<=0:
+            enemies.remove(enemy)
+            continue
         screen.blit(
             mushroom_img,
             (enemy.x - mushroom_img.get_width() / 2, enemy.y - mushroom_img.get_height() / 2),
