@@ -43,8 +43,8 @@ def attack_sq(alleati):
     for nemico in enemies:
         for alleato in alleati:
             if ponti[nemico.x]==alleato.ponte and abs(nemico.y-alleato.pos)<=15:
-                nemico.y-=12
-                alleato.pos+=12
+                nemico.y-=15
+                alleato.pos+=15
                 nemico.vita-=alleato.carta.power
                 alleato.vita-=2.5
 
