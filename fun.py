@@ -11,3 +11,12 @@ def click_card(x_pos, y_pos, screen_height, screen_width, card_width, card_heigh
         return 2
     else:
         return -1
+    
+def good_position(x_pos, y_pos):
+    if x_pos<=102 and y_pos<=554 and y_pos>=510 and x_pos>=58:
+        return 0
+    if x_pos<=252 and y_pos<=554 and y_pos>=510 and x_pos>=208:   
+        return 1
+    if x_pos<=406 and y_pos<=554 and y_pos>=510 and x_pos>=362:
+        return 2
+    return -1

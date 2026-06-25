@@ -109,6 +109,13 @@ while game:
 
             def_pos=-1
             if ask_pos:
+                
+                def_pos=fun.good_position(mouse_xPos,mouse_yPos)
+                if def_pos == 0 or def_pos == 1 or def_pos == 2:
+                    ask_pos = False
+                
+
+                '''
                 if mouse_xPos<=102 and mouse_yPos<=554 and mouse_yPos>=510 and mouse_xPos>=58:
                     def_pos=0
                     ask_pos=False
@@ -118,6 +125,7 @@ while game:
                 if mouse_xPos<=406 and mouse_yPos<=554 and mouse_yPos>=510 and mouse_xPos>=362:
                     def_pos=2
                     ask_pos=False
+                '''
                 
 
 
