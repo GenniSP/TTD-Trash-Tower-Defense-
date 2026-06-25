@@ -1,0 +1,30 @@
+# Dependencies
+node_modules/
+vendor/
+
+# Build outputs
+dist/
+build/
+*.min.js
+
+# Environment files
+.env
+.env.local
+config/secrets.yml
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+
+# Compiled Python files
+*.pyc
+
+# Python cache directories
+__pycache__/
+*.pyo
+*.pyd
+
+# OS files
+.DS_Store
+Thumbs.db
