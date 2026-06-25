@@ -178,6 +178,29 @@ while game:
         if el.vita<=0:
             lista_alleati.remove(el)
             continue
+        image=None
+        global last_toggle_all
+        global now_ms
+        if el.carta.tipo==2:
+            now_ms = pygame.time.get_ticks()
+            if now_ms - last_toggle_all >= 200:
+                last_toggle_all = now_ms
+                current_image = 2 if current_image == 1 else 1
+            if current_image==1:
+                image=pygame.image.load("assets/buoni/mago_forte/design/mago_movimento_1")
+            else: image=pygame.image.load("assets/buoni/mago_forte/design/mago_movimento_2")
+
+        if el.carta.tipo==0:
+            if now_ms - last_toggle_all >= 200:
+                last_toggle_all = now_ms
+                current_image = 2 if current_image == 1 else 1
+            if current_image==1:
+                image=pygame.image.load("assets/buoni/gufo_debole/design/gufo_movimento_1")
+            else: image=pygame.image.load("assets/buoni/gufo_debole/design/gufo_moviment_2")
+
+        if el.carta.tipo==1:
+            image=pygame.image.load("assets/buoni/rana/rana.png")
+
         
         # Check if ally reached top of screen (80px from top)
         if el.pos <= 150:
@@ -186,7 +209,7 @@ while game:
             lista_alleati.remove(el)
             continue
         
-        image=pygame.image.load("assets/mago_alleato.jpg")
+
         image=pygame.transform.scale(image,(60,70))
         x_ponte=-1
         if el.ponte==0:
