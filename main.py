@@ -22,7 +22,7 @@ counter = -1
 next_enemy_counter = 0
 
 # Enable GPU acceleration with hardware surface and double buffering
-myScreen = pygame.display.set_mode((sizeX, sizeY), pygame.HWSURFACE | pygame.DOUBLEBUF,display=2)
+myScreen = pygame.display.set_mode((sizeX, sizeY), pygame.HWSURFACE | pygame.DOUBLEBUF,display=0)
 pygame.display.set_caption('DTT')
 
 # custom background (convert to GPU-optimized format)
