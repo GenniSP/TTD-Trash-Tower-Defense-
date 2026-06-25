@@ -174,7 +174,7 @@ while game:
 
     enemy_module.attack_sq(lista_alleati)
     
-    health_loss = enemy_module.move_monster(myScreen, sizeY-cSizeY-52)
+    health_loss = enemy_module.move_monster(myScreen, sizeY-cSizeY-40)
     health_bar_alleati.apply_health_loss(health_loss)
 
 
@@ -204,6 +204,15 @@ while game:
 
         if el.carta.tipo==1:
             image=pygame.image.load("assets/buoni/rana/rana.png")
+
+        
+        # Check if ally reached top of screen (80px from top)
+        if el.pos <= 150:
+            # Deal damage based on card power
+            health_bar.current_health -= el.carta.power * 10
+            lista_alleati.remove(el)
+            continue
+        
 
         image=pygame.transform.scale(image,(60,70))
         x_ponte=-1

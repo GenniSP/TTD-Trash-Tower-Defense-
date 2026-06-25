@@ -32,3 +32,4 @@ def draw_health_bar(myScreen):
                                           health_bar_y + health_bar_height // 2))
 
     myScreen.blit(hp_text,text_rect)
+

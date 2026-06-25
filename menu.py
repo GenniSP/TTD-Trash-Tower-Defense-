@@ -64,7 +64,8 @@ def play_tutorial(screen, clock):
                     return
             screen.fill((0, 0, 0))
             screen.blit(pygame.image.load(BG_IMAGE).convert(), (0, 0))
-            msg = font.render('Tutorial unavailable. Press any key to return.', True, (255,255,255))
+            msg = font.render('Tutorial unavailable. ', True, (255,255,255))
+            msg1 = font.render('Press any key to return.', True, (255,255,255))
             screen.blit(msg, msg.get_rect(center=screen.get_rect().center))
             pygame.display.flip()
             clock.tick(30)
