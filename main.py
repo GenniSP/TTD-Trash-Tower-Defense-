@@ -5,6 +5,8 @@ import enemy_module
 import health_bar
 import health_bar_alleati
 import card_text
+import ps
+import good
 
 
 # initialize the environment
@@ -20,7 +22,7 @@ counter = -1
 next_enemy_counter = 0
 
 # Enable GPU acceleration with hardware surface and double buffering
-myScreen = pygame.display.set_mode((sizeX, sizeY), pygame.HWSURFACE | pygame.DOUBLEBUF)
+myScreen = pygame.display.set_mode((sizeX, sizeY), pygame.HWSURFACE | pygame.DOUBLEBUF,display=2)
 pygame.display.set_caption('DTT')
 
 # custom background (convert to GPU-optimized format)
@@ -46,13 +48,17 @@ tempo=0
 tempo_change=0
 
 game=True
-mana=0
+mana=69
 ck=pygame.time.Clock() 
 passed=0
 inizio_passed_carte=-1
 mana_time=-1
 mana_text_temp=pygame.font.Font(None,25)
 not_enough=mana_text_temp.render(f"Not enough Mana!",True,(255,255,255))
+ask_pos=False
+def_pos=-1
+lista_alleati=[]
+x=-2
 
 while game:
     next_enemy_counter += 1
@@ -70,6 +76,9 @@ while game:
     mana_text=game_font.render(f"Mana: {mana}",True, (255,255,255))
     myScreen.blit(mana_text,(315,10))
 
+
+
+
     for event in pygame.event.get():
         if event.type == pygame.MOUSEBUTTONDOWN: # if clicked
             pos= pygame.mouse.get_pos()
@@ -82,15 +91,48 @@ while game:
                         mana-=lista_correnti[x].costo
                         carte_disp=False
                         print(x)
+                        current_charachter=lista_correnti[x]
+
+                        ask_pos=True
+
+                        print("pos: "+str(pos))
                     else:
                         print("not enough mana")
                         mana_time=900
                 else: print("card not selected")
-            else: print("cards not available")
+
+            def_pos=-1
+            if ask_pos:
+                if mouse_xPos<=102 and mouse_yPos<=554 and mouse_yPos>=510 and mouse_xPos>=58:
+                    def_pos=0
+                    ask_pos=False
+                if mouse_xPos<=252 and mouse_yPos<=554 and mouse_yPos>=510 and mouse_xPos>=208:   
+                    def_pos=1
+                    ask_pos=False
+                if mouse_xPos<=406 and mouse_yPos<=554 and mouse_yPos>=510 and mouse_xPos>=362:
+                    def_pos=2
+                    ask_pos=False
+                
+
+
+
+
+    if def_pos!=-1:
+        temp=good.Alleato(lista_correnti[x],def_pos,532)
+        lista_alleati.append(temp)
+        def_pos=-1
+
+
+
+
+
 
         
     health_bar.draw_health_bar(myScreen)
     health_bar_alleati.draw_health_bar(myScreen)
+
+    if ask_pos:
+        ps.draw_pos(myScreen)
 
     if mana_time>0:
         mana_time-=tempo_change
@@ -123,6 +165,22 @@ while game:
     if carte_disp == True:
         for i in range(3):
             card_text.draw_card_values(myScreen, lista_correnti[i], i)
+
+
+
+    for el in lista_alleati:
+        el.pos-=0.5
+        image=pygame.image.load("assets/mago_alleato.jpg")
+        image=pygame.transform.scale(image,(60,70))
+        x_ponte=-1
+        if el.ponte==0:
+            x_ponte=49
+        if el.ponte==1:
+            x_ponte=208
+        if el.ponte==2:
+            x_ponte=358
+        myScreen.blit(image,(x_ponte,el.pos))
+
 
     pygame.display.flip() #ricarica con il mana
     myScreen.blit(background, (0, 0)) #fai ritornare il background

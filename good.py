@@ -1,9 +1,9 @@
-import pygame
+import carte
+class Alleato:
+    def __init__(self,carta,ponte,pos):
+        self.carta=carta
+        self.ponte=ponte
+        self.pos=pos
+        pass
 
-active = []
 
-def add_active():
-    active.append()
-
-def spawn_good(screen, height, ):
-    pass
