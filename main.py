@@ -178,7 +178,12 @@ while game:
         if el.vita<=0:
             lista_alleati.remove(el)
             continue
-        image=pygame.image.load("assets/mago_alleato.jpg")
+        image=None
+        if el.carta.tipo==2:
+            image=pygame.image.load("assets/mago_alleato.jpg")
+        if el.carta.tipo==0:
+            image=pygame.image.load("assets/mago_alleato.jpg")
+
         image=pygame.transform.scale(image,(60,70))
         x_ponte=-1
         if el.ponte==0:
