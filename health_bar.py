@@ -8,7 +8,7 @@ current_health = max_health
 health_bar_x = 10
 health_bar_y = 10
 health_bar_width = 200
-health_bar_height = 20
+health_bar_height = 25
 
 color_red = (255, 0, 0)
 color_gray = (200, 200, 200)
