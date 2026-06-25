@@ -21,9 +21,15 @@ cSizeY = 216
 counter = -1
 next_enemy_counter = 0
 
+global last_toggle_all
+last_toggle_all=0
+global now_ms
+global current_image
+current_image=1
+
 # Enable GPU acceleration with hardware surface and double buffering
 myScreen = pygame.display.set_mode((sizeX, sizeY), pygame.HWSURFACE | pygame.DOUBLEBUF,display=0)
-pygame.display.set_caption('DTT')
+pygame.display.set_caption('TTD')
 
 # custom background (convert to GPU-optimized format)
 background = pygame.image.load('assets/background1.png') 
@@ -179,24 +185,22 @@ while game:
             lista_alleati.remove(el)
             continue
         image=None
-        global last_toggle_all
-        global now_ms
+        now_ms = pygame.time.get_ticks()
         if el.carta.tipo==2:
-            now_ms = pygame.time.get_ticks()
             if now_ms - last_toggle_all >= 200:
                 last_toggle_all = now_ms
                 current_image = 2 if current_image == 1 else 1
             if current_image==1:
-                image=pygame.image.load("assets/buoni/mago_forte/design/mago_movimento_1")
-            else: image=pygame.image.load("assets/buoni/mago_forte/design/mago_movimento_2")
+                image=pygame.image.load("assets/buoni/mago_forte/design/mago_movimento_1.png")
+            else: image=pygame.image.load("assets/buoni/mago_forte/design/mago_movimento_2.png")
 
         if el.carta.tipo==0:
             if now_ms - last_toggle_all >= 200:
                 last_toggle_all = now_ms
                 current_image = 2 if current_image == 1 else 1
             if current_image==1:
-                image=pygame.image.load("assets/buoni/gufo_debole/design/gufo_movimento_1")
-            else: image=pygame.image.load("assets/buoni/gufo_debole/design/gufo_moviment_2")
+                image=pygame.image.load("assets/buoni/gufo_debole/design/gufo_movimento_1.png")
+            else: image=pygame.image.load("assets/buoni/gufo_debole/design/gufo_moviment_2.png")
 
         if el.carta.tipo==1:
             image=pygame.image.load("assets/buoni/rana/rana.png")
