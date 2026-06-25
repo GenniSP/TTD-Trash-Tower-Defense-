@@ -168,7 +168,7 @@ while game:
 
     enemy_module.attack_sq(lista_alleati)
     
-    health_loss = enemy_module.move_monster(myScreen, sizeY-cSizeY-40)
+    health_loss = enemy_module.move_monster(myScreen, sizeY-cSizeY-52)
     health_bar_alleati.apply_health_loss(health_loss)
 
 
