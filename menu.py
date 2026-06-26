@@ -87,11 +87,11 @@ def play_tutorial(screen, clock):
         pygame.display.flip()
         clock.tick(24)
     clip.close()
-
+#difficlotà, le barre, spostare il mana,
 
 def main():
     pygame.init()
-    screen = pygame.display.set_mode((450, 800))
+    screen = pygame.display.set_mode((450, 800),display=0)
     pygame.display.set_caption('Menu')
     clock = pygame.time.Clock()
 

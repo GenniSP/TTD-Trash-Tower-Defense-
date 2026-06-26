@@ -54,7 +54,7 @@ tempo=0
 tempo_change=0
 
 game=True
-mana=69
+mana=0
 ck=pygame.time.Clock() 
 passed=0
 inizio_passed_carte=-1
@@ -75,10 +75,10 @@ while game:
     if carte_disp:
         inizio_passed_carte=tempo
     
-    if passed>=7200:
+    if passed>=7600:
         if mana<32:
             mana+=4
-        passed-=7150 #tolgo il tempo trascorso/non resetto a 0 altrimenti perderei probabiblmente qualche millisecondo
+        passed-=7550 #tolgo il tempo trascorso/non resetto a 0 altrimenti perderei probabiblmente qualche millisecondo
     mana_text=game_font.render(f"Mana: {mana}",True, (255,255,255))
     myScreen.blit(mana_text,(315,10))
 
