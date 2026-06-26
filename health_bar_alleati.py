@@ -1,8 +1,14 @@
 import pygame
+import fun
+import os
+import subprocess
+import sys
 
 pygame.font.init()
 max_health = 150
 current_health = max_health
+
+
 
 health_bar_x = 10
 health_bar_y = 33
@@ -30,6 +36,9 @@ def draw_health_bar(myScreen):
     text_rect = hp_text.get_rect(center=(health_bar_x + health_bar_width // 2, 
                                           health_bar_y + health_bar_height // 2))
     myScreen.blit(hp_text, text_rect)
+
+    if current_health <= 0:
+        subprocess.run([sys.executable, "youloose.py"])
 
 
 def apply_health_loss(loss):
