@@ -18,7 +18,7 @@ startValue02 = 210
 startValue1 = 250
 
 enemies = []
-enemy_limit = 3
+enemy_limit = 4
 enemy_cooldown = 0
 
 pos_x_0 = 450/5.7
@@ -27,7 +27,7 @@ pos_x_1 = 450/1.9
 pos_y_1 = startValue1
 pos_x_2 = 450/1.15
 pos_y_2 = startValue02
-shift_y = 0.5
+shift_y = 0.7
 
 
 # Animation timer for mushroom alternation every 200ms
@@ -88,6 +88,6 @@ def choose_position():
             case 2:
                 enemies.append(Enemy(pos_x_2, pos_y_2))
         global enemy_cooldown
-        enemy_cooldown = random.randint(100, 1000)
+        enemy_cooldown = random.randint(100, 666)
         return enemy_cooldown
     else: return enemy_cooldown

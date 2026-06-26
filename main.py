@@ -64,7 +64,6 @@ not_enough=mana_text_temp.render(f"Not enough Mana!",True,(255,255,255))
 ask_pos=False
 def_pos=-1
 lista_alleati=[]
-x=-2
 
 while game:
     next_enemy_counter += 1
